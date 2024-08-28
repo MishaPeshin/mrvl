@@ -23,6 +23,12 @@ class RandomChar extends Component {
         this.updateChar();
     }
 
+    onCharLoading = () => {
+        this.setState({
+            loading: true
+        })
+    }
+
     onCharLoaded = (char) => {
         this.setState({ char, loading: false });
     }
@@ -36,10 +42,10 @@ class RandomChar extends Component {
 
     updateChar = () => {
         const id = Math.floor(Math.random() * (1011355 - 1009224) + 1009224); // большинство персонажей лежит в этом диапозоне
+        this.onCharLoading();
         this.marvelService
             .getCharacter(id)
             .then(this.setState({
-                loading: true,
                 error: false
             }))
             .then(this.onCharLoaded)
@@ -82,16 +88,14 @@ class RandomChar extends Component {
 const View = ({ char }) => { // компонент для рендера (не содержит логики)
     const { name, description, thumbnail, homepage, wiki } = char;
 
-    let style = {};
+    let imgStyle = { 'objectFit': 'cover' };
     if (thumbnail === "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg") {
-        style = { 'objectFit': 'contain' }
-    } else {
-        style = { 'objectFit': 'cover' }
+        imgStyle = { 'objectFit': 'contain' }
     }
 
     return (
         <div className="randomchar__block">
-            <img src={thumbnail} style={style} alt="Random character" className="randomchar__img" />
+            <img src={thumbnail} style={imgStyle} alt="Random character" className="randomchar__img" />
             <div className="randomchar__info">
                 <p className="randomchar__name">{name}</p>
                 <p className="randomchar__descr">{description}</p>
