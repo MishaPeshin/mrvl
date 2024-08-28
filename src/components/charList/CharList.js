@@ -125,7 +125,7 @@ class CharList extends Component {
     }
 }
 
-CharList.PropTypes = {
+CharList.propTypes = {
     onCharSelected: PropTypes.func.isRequired
 }
 
