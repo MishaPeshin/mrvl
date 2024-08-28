@@ -1,4 +1,5 @@
 import { Component } from "react";
+import ErrorBoudary from "../errorBoundary/ErrorBoudary";
 
 import AppHeader from "../appHeader/AppHeader";
 import RandomChar from "../randomChar/RandomChar";
@@ -23,10 +24,16 @@ class App extends Component {
             <div className="app" >
                 <AppHeader />
                 <main>
-                    <RandomChar />
+                    <ErrorBoudary>
+                        <RandomChar />
+                    </ErrorBoudary>
                     <div className="char__content">
-                        <CharList onCharSelected={this.onCharSelected} />
-                        <CharInfo charId={this.state.selectedChar} />
+                        <ErrorBoudary>
+                            <CharList onCharSelected={this.onCharSelected} />
+                        </ErrorBoudary>
+                        <ErrorBoudary>
+                            <CharInfo charId={this.state.selectedChar} />
+                        </ErrorBoudary>
                     </div>
                     <img className="bg-decoration" src={decoration} alt="vision" />
                 </main>
