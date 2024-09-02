@@ -1,14 +1,12 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import useMarvelService from '../../services/MarvelService';
 import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
 
 import './comicsList.scss';
-import uw from '../../resources/img/UW.png';
-import xMen from '../../resources/img/x-men.png';
-import { func } from 'prop-types';
 
-const ComicsList = (props) => {
+const ComicsList = () => {
     const [comicsList, setComicsList] = useState([]);
     const [offset, setOffset] = useState(210);
     const [newItemsLoading, setNewItemsLoading] = useState(false);
@@ -47,11 +45,11 @@ const ComicsList = (props) => {
                     tabIndex={0}
                     key={i}>
 
-                    <a href="#">
+                    <Link to={`${item.id}`}>
                         <img src={thumbnail} alt={title} className="comics__item-img" />
                         <div className="comics__item-name">{title}</div>
                         <div className="comics__item-price">{price}</div>
-                    </a>
+                    </Link>
                 </li>
             )
         });
