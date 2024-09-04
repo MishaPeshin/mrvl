@@ -16,7 +16,6 @@ const CharSearchForm = () => {
         setChar(char);
     }
 
-
     const updateChar = (name) => {
         clearError();
 
